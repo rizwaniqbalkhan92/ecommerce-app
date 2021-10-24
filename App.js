@@ -14,6 +14,8 @@ import Slider from './Components/Home/Slider'
 import AllProducts from './Components/Home/AllProducts';
 import CategoriesAll from './Components/Catgories/CategoriesAll';
 import Clothes from './Components/Catgories/Clothes';
+import DetailsPage  from './Components/Details/DetailsPage'
+import AddToCard from './Components/CardOptions/AddToCard';
 import {
   SafeAreaView,
   ScrollView,
@@ -24,7 +26,7 @@ import {
   View,
 } from 'react-native';
 import DifferentCategories from './Components/Home/DifferentCategories';
-
+import WishList from './Components/Favourite/WishList';
 import {
   Colors,
   DebugInstructions,
@@ -82,7 +84,10 @@ const App: () => Node = () => {
 {/* <CategoriesAll/> */}
 {/* <Shoes/> */}
 {/* <Clothes/> */}
-<Electronics/>
+{/* <Electronics/> */}
+{/* <DetailsPage/> */}
+{/* <WishList/> */}
+<AddToCard/>
 
     </SafeAreaView>
   );
