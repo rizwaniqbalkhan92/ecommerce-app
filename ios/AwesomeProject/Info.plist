@@ -6,6 +6,10 @@
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>AwesomeProject</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Tasveer lelon?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>camera allow</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

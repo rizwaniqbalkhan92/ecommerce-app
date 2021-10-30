@@ -103,7 +103,7 @@ display:'flex',alignItems:'center' },
         flexDirection:'row',
         justifyContent:'space-around',
         marginTop:20,
-        marginLeft:30
+        marginLeft:22
     },
     product1: {
       width: 162,

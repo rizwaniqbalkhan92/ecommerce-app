@@ -3,7 +3,7 @@ import { View, Text,StyleSheet,TouchableOpacity ,TextInput} from 'react-native'
 import { Button, ButtonGroup } from 'native-base';
 
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
     return (
         <View>
            <View style={styles.signUp1}>
@@ -14,8 +14,10 @@ const SignUp = () => {
   <TextInput placeholder='Email'  style={styles.input1} />
   <TextInput placeholder='Email'  style={styles.input1} />
 
-  <Text style={styles.alreadyAccount}>Already Account?</Text>
-<TouchableOpacity style={styles.btn}>
+ <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
+ <Text style={styles.alreadyAccount}>Already Account?</Text>
+ </TouchableOpacity>
+<TouchableOpacity onPress={()=>navigation.navigate('Drawer')} style={styles.btn}>
     <Text style={styles.btnText}>SignUp</Text>
 </TouchableOpacity>
 
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
   width:127,
   height:41,
   top:99,
-  left:16
+  left:6
     },
     textSignUp:{
       fontSize:34,
@@ -103,7 +105,7 @@ color: '#333333'
         height:40,
         backgroundColor:'#FF8C00',
         position: 'relative',
-left: 20,
+left: 17,
 right: 0,
 top: 133,
 // bottom: 10,

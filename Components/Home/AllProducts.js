@@ -6,7 +6,10 @@ import img2 from '../images/img2.jpg'
 import img3 from '../images/img3.jpg'
 import img4 from '../images/img4.jpg'
 import img5 from '../images/img5.jpg'
+import  Slider  from './Slider'
 import img6 from '../images/img6.jpg'
+import DifferentCategories  from  '../Home/DifferentCategories'
+
 const AllProducts = () => {
 
 const data=[
@@ -35,6 +38,10 @@ const data=[
 ]
 
   return (
+    <View>
+
+    <DifferentCategories/>
+      
       <FlatList  data={data} numColumns={2} renderItem={({item})=>(
 <View style={styles.allProducts}>
       <View style={styles.product1}>
@@ -54,6 +61,7 @@ const data=[
     </View>
       )}  />
     
+    </View>
   );
 };
 
@@ -65,7 +73,7 @@ const styles = StyleSheet.create({
       flexDirection:'row',
       justifyContent:'space-around',
       marginTop:20,
-      marginLeft:30
+      marginLeft:23
   },
   product1: {
     width: 162,

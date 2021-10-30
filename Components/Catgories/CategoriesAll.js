@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     height: 100,
     // borderWidth: 1,
     // borderColor: 'red',
-    left: 33,
+    left: 22,
     top: 20,
     marginBottom: 16,
     backgroundColor: '#F2F2F2',
