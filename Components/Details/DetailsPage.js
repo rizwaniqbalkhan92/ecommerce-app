@@ -5,6 +5,7 @@ import img1 from '../images/img1.jpg';
 import img2 from '../images/img2.jpg';
 import img3 from '../images/img3.jpg';
 import img4 from '../images/img4.jpg';
+
 import {
   Select,
   VStack,
@@ -13,7 +14,7 @@ import {
   
 } from "native-base"
 
-const DetailsPage = () => {
+const DetailsPage = ({navigation}) => {
 const [color,setColor]=useState('')
 const [size,setSize]=useState('')
 const [img,setImg]=useState(img1)
@@ -25,7 +26,7 @@ const [img,setImg]=useState(img1)
     <View style={styles.main}>
       <View style={styles.headerDiv}>
         <NativeBaseProvider>
-          <TouchableOpacity style={styles.icons}>
+          <TouchableOpacity onPress={navigation.navigate('AllProducts')}  style={styles.icons}>
             <ArrowBackIcon size="6" />
           </TouchableOpacity>
         </NativeBaseProvider>

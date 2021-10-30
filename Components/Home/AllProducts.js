@@ -9,8 +9,10 @@ import img5 from '../images/img5.jpg'
 import  Slider  from './Slider'
 import img6 from '../images/img6.jpg'
 import DifferentCategories  from  '../Home/DifferentCategories'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-const AllProducts = () => {
+
+const AllProducts = ({navigation}) => {
 
 const data=[
     {image:img1,price:'Rs 5000'},
@@ -45,10 +47,10 @@ const data=[
       <FlatList  data={data} numColumns={2} renderItem={({item})=>(
 <View style={styles.allProducts}>
       <View style={styles.product1}>
-<TouchableOpacity>
+<TouchableOpacity onPress={()=>navigation.navigate('DetailPage')}>
 
         {/* <View style={styles.image}> */}
-            <Image source={item.image} style={styles.image} resizeMode='contain' />
+            <Image source={item.image}  style={styles.image} resizeMode='contain' />
         {/* </View> */}
 </TouchableOpacity>
         <View style={styles.text}>
@@ -64,7 +66,6 @@ const data=[
     </View>
   );
 };
-
 export default AllProducts;
 
 const styles = StyleSheet.create({

@@ -7,11 +7,11 @@
  */
 
 import React from 'react';
-import Config  from './Components/Database/Config'
+import './Components/Database/Config'
 // import Drawer  from './Components/Navigation/Drawer'
 import Home from './Components/Home/Home'
 import Stack2  from  './Components/Navigation/Stack'
-import type {Node} from 'react';
+// import type {Node} from 'react';
 import SignUp from './Components/Authentication/SignUp';
 import Login from  './Components/Authentication/LoginUi'
 import Slider from './Components/Home/Slider'

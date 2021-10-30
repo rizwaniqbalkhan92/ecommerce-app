@@ -6,19 +6,23 @@ import SignUp from '../Authentication/SignUp'
 import Drawer  from '../Navigation/Drawer'
 import CreateProducts from '../SellerAccount/CreateProducts'
 import CreateCatorgories from '../SellerAccount/CreateCatorgories'
-
+import DrawerSeller  from '../Navigation/DrawerSeller'
 
 
 const MainStack=createStackNavigator()
 
 const Stack = () => {
     return (
-     <MainStack.Navigator>
-         {/* <MainStack.Screen  name='Drawer' component={Drawer}  />
+     <MainStack.Navigator  
+     screenOptions={{
+        headerShown: false
+      }} >
+         <MainStack.Screen  name='Login' component={Login}  />
          <MainStack.Screen  name='SignUp' component={SignUp}  />
-         <MainStack.Screen  name='Login' component={Login}  /> */}
+         {/* <MainStack.Screen  name='DrawerSeller' component={DrawerSeller}  /> */}
+         <MainStack.Screen  name='Drawer' component={Drawer}  />
          {/* <MainStack.Screen  name='CreateProducts' component={CreateProducts} /> */}
-         <MainStack.Screen  name='CreateProducts' component={CreateCatorgories} />
+         {/* <MainStack.Screen  name='CreateProducts' component={CreateCatorgories} /> */}
 
      </MainStack.Navigator>
     )

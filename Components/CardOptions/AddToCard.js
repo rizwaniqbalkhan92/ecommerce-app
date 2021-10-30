@@ -23,7 +23,7 @@ import {
   import img4 from '../images/img4.jpg';
   import img5 from '../images/img5.jpg';
   import img6 from '../images/img6.jpg';
-const AddToCard = () => {
+const AddToCard = ({navigation}) => {
 
     const data = [
         {image: img1, price: 'Rs 5000'},
@@ -82,7 +82,7 @@ const AddToCard = () => {
           <Text style={styles.btnText}>Total: Rs.3230</Text>
       </View>
       <View style={styles.btnCheckout}>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate('checkOut')}>
               <Text style={styles.btnText2}>Check Out</Text>
           </TouchableOpacity>
       </View>

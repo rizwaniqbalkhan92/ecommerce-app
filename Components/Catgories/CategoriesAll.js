@@ -24,7 +24,7 @@ import img5 from '../images/img5.jpg';
 import img6 from '../images/img6.jpg';
 import {width} from 'styled-system';
 
-const CategoriesAll = () => {
+const CategoriesAll = ({navigation}) => {
   const [openInput, setOpenInp] = useState(false);
   const data = [
     {image: img1, price: 'Rs 5000'},
@@ -43,7 +43,7 @@ const CategoriesAll = () => {
           <NativeBaseProvider>
             {/* <Center flex={1} px="3"> */}
             <TouchableOpacity>
-              <ArrowBackIcon size="6" />
+              <ArrowBackIcon size="6"  onPress={navigation.navigate('CategoriesAll')}  />
             </TouchableOpacity>
           </NativeBaseProvider>
           {/* </Center> */}
@@ -73,21 +73,39 @@ const CategoriesAll = () => {
       <CloseIcon style={openInput ? styles.closeShow : styles.closeNotshow} size="4" />
       </TouchableOpacity>
       </NativeBaseProvider> */}
-      <FlatList
-        data={data}
-        renderItem={({item}) => (
-          <TouchableOpacity>
+ 
+          <TouchableOpacity onPress={()=>navigation.navigate('Shoes')} >
             <View style={styles.mainCategory}>
               <View style={styles.catrgory}>
                 <View style={styles.categorytext}>
-                  <Text style={styles.categorytext2}>Kitchen Item</Text>
+                  <Text style={styles.categorytext2}>Shoes</Text>
                 </View>
-                <Image source={item.image} style={styles.categoryImage} />
+                {/* <Image source={item.image} style={styles.categoryImage} /> */}
               </View>
             </View>
           </TouchableOpacity>
-        )}
-      />
+          <TouchableOpacity  onPress={()=>navigation.navigate('Clothes')}  >
+            <View style={styles.mainCategory}>
+              <View style={styles.catrgory}>
+                <View style={styles.categorytext}>
+                  <Text style={styles.categorytext2}>Clothes</Text>
+                </View>
+                {/* <Image source={item.image} style={styles.categoryImage} /> */}
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity  onPress={()=>navigation.navigate('Electronics')}  >
+            <View style={styles.mainCategory}>
+              <View style={styles.catrgory}>
+                <View style={styles.categorytext}>
+                  <Text style={styles.categorytext2}>Electronics</Text>
+                </View>
+                {/* <Image source={item.image} style={styles.categoryImage} /> */}
+              </View>
+            </View>
+          </TouchableOpacity>
+         
+     
     </View>
   );
 };

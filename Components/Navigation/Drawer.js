@@ -14,7 +14,7 @@ const Drawer = () => {
         <MainDrawer.Navigator>
             <MainDrawer.Screen name='tabBottom' component={TabBottom}  />
             <MainDrawer.Screen name='about' component={About}  />
-            <MainDrawer.Screen name='DetailsPage' component={DetailsPage}  />
+            {/* <MainDrawer.Screen name='DetailsPage' component={DetailsPage}  /> */}
         </MainDrawer.Navigator>
   
     )
