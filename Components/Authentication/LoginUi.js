@@ -1,17 +1,39 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { View, Text,StyleSheet,TouchableOpacity ,TextInput} from 'react-native'
 import { Button, ButtonGroup } from 'native-base';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 const Login = ({navigation}) => {
+const [email,setEmail]=useState('')
+const [password,setPassword]=useState('')
+
+  const signIn=(e)=>{
+    e.preventDefault()
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+
+  }
+
+    
     return (
         <View>
            <View style={styles.signUp1}>
 
 <View style={styles.signUp1inner}>
   <Text style={styles.textSignUp}>Login</Text>
-  <TextInput placeholder='Email'  style={styles.input1} />
-  <TextInput placeholder='Email'  style={styles.input1} />
+  <TextInput placeholder='Email' keyboardType='email-address'  onChangeText={e=>setEmail(e.target.value)}  style={styles.input1} />
+  <TextInput placeholder='Password' onChangeText={e=>setPassword(e.target.value)}  keyboardType='visible-password'  style={styles.input1} />
   {/* <TextInput placeholder='Email'  style={styles.input1} /> */}
   <Text  style={styles.alreadyAccount}>Already Account?</Text>
 <TouchableOpacity style={styles.btn}onPress={()=>navigation.navigate('SignUp')}>

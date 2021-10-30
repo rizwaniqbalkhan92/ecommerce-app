@@ -11,7 +11,7 @@ import Config  from './Components/Database/Config'
 // import Drawer  from './Components/Navigation/Drawer'
 import Home from './Components/Home/Home'
 import Stack2  from  './Components/Navigation/Stack'
-import type {Node} from 'react';
+// import type {Node} from 'react';
 import SignUp from './Components/Authentication/SignUp';
 import Login from  './Components/Authentication/LoginUi'
 import Slider from './Components/Home/Slider'
@@ -51,7 +51,7 @@ import Shoes from './Components/Catgories/Shoes'
 import Electronics from './Components/Catgories/Electronics'
 
 
-const Section = ({children, title}): Node => {
+const Section = ({children, title}) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -90,7 +90,7 @@ const MainStack=createStackNavigator()
 // </Drawer.Navigator>
 //   )
 // }
-const App: () => Node = () => {
+const App = () => {
 
   const isDarkMode = useColorScheme() === 'dark';
 
