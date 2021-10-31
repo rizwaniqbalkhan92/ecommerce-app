@@ -1,20 +1,75 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { View, Text,StyleSheet,TouchableOpacity ,TextInput} from 'react-native'
 import { Button, ButtonGroup } from 'native-base';
-
+// import AsyncStorage from '@react-native-community/async-storage'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = ({navigation}) => {
+  const [email,setEmail]=useState('')
+  const [password,setpassword]=useState('')
+  
+  
+  const signIn=(e)=>{
+    e.preventDefault()
+    
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then( (userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+     
+        // const user2={
+        //   email:user.email,
+        //   uid:user.uid
+        // }
+    //  const userdata=JSON.stringify(user2)
+        
+        // try {
+          // AsyncStorage.setItem("user",uid);
+        // } catch (error) {
+        //   console.log(error)
+        //   // Error saving data
+        //   console.log(error)
+        // try {
+        //   await AsyncStorage.setItem(
+        //     'userdata',
+        //     userdata
+        //   );
+        // } catch (error) {
+        //   // Error saving data
+        //   console.log('error',error)
+      // }
+      // }
+      navigation.navigate('Drawer')
+       
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+
+  }
     return (
         <View>
            <View style={styles.signUp1}>
 
 <View style={styles.signUp1inner}>
   <Text style={styles.textSignUp}>Login</Text>
-  <TextInput placeholder='Email'  style={styles.input1} />
-  <TextInput placeholder='Email'  style={styles.input1} />
+  <TextInput placeholder='Email' onChangeText={e=>setEmail(e)} style={styles.input1} />
+  <TextInput placeholder='Password' onChangeText={e=>setpassword(e)} style={styles.input1} />
   {/* <TextInput placeholder='Email'  style={styles.input1} /> */}
-  <Text  style={styles.alreadyAccount}>Already Account?</Text>
-<TouchableOpacity style={styles.btn}onPress={()=>navigation.navigate('SignUp')}>
+<View style={styles.links}>
+
+  <TouchableOpacity onPress={()=>navigation.navigate('SignUp')}>
+ <Text style={styles.alreadyAccount}>User ?</Text>
+ </TouchableOpacity>
+  <TouchableOpacity onPress={()=>navigation.navigate('SellerLogin')}>
+ <Text style={styles.alreadyAccount}>Seller Already Account?</Text>
+ </TouchableOpacity>
+</View>
+<TouchableOpacity style={styles.btn}onPress={signIn}>
     <Text style={styles.btnText}>SignUp</Text>
 </TouchableOpacity>
 
@@ -24,6 +79,11 @@ const Login = ({navigation}) => {
     )
 }
 const styles = StyleSheet.create({
+  links:{
+    display:'flex',
+    flexDirection:'row',
+justifyContent:'space-around'
+  },
     sectionContainer: {
       marginTop: 32,
       paddingHorizontal: 24,

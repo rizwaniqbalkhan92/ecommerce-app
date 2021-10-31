@@ -1,52 +1,54 @@
 import React,{useState} from 'react'
-import { View, Text,StyleSheet,TouchableOpacity ,TextInput} from 'react-native'
+import { View, Text,StyleSheet,TouchableOpacity , TextInput} from 'react-native'
 import { Button, ButtonGroup } from 'native-base';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { AsyncStorage } from 'react-native';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const SellerLogin = ({navigation}) => {
+  const [email,setEmail]=useState('')
+  const [password,setpassword]=useState('')
+  
+  
+  const signIn=(e)=>{
+    e.preventDefault()
 
 
-const SignUp = ({navigation}) => {
-const [email,setEmail]=useState('')
-const [password,setPssword]=useState('')
-const signUp=(e)=>{
-e.preventDefault()
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        navigation.navigate('DrawerSeller')
+        alert('Successfully Login')
+        userdata={
+            email:user.email,
+            uid:user.uid
+          }
+        // localStorage.setItem({"seller":sellerdata})
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert('Error',errorMessage)
+      });
 
-  const auth = getAuth();
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      alert('success')
-      navigation.navigate('Login')
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
-    });
-
-
-
-}
-
+  }
     return (
         <View>
            <View style={styles.signUp1}>
 
 <View style={styles.signUp1inner}>
-  <Text style={styles.textSignUp}>SignUp</Text>
-  <TextInput placeholder='Email'  keyboardType='email-address' onChangeText={e=>setEmail(e)} style={styles.input1} />
-  <TextInput placeholder='Password'  keyboardType='visible-password'  onChangeText={e=>setPssword(e)} style={styles.input1} />
+  <Text style={styles.textSignUp}>Seller Login</Text>
+  <TextInput placeholder='Email' onChangeText={e=>setEmail(e)} style={styles.input1} />
+  <TextInput placeholder='Password' onChangeText={e=>setpassword(e)} style={styles.input1} />
   {/* <TextInput placeholder='Email'  style={styles.input1} /> */}
+  <TouchableOpacity  onPress={()=>navigation.navigate('sellerSignUp')} >
+  <Text  style={styles.alreadyAccount}>Are you new Seller?</Text>
 
- <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
- <Text style={styles.alreadyAccount}>Already Account?</Text>
- </TouchableOpacity>
- <TouchableOpacity onPress={()=>navigation.navigate('SellerSignUp')}>
- <Text style={styles.alreadyAccount}>Seller ?</Text>
- </TouchableOpacity>
-<TouchableOpacity onPress={signUp} style={styles.btn}>
-    <Text style={styles.btnText}>SignUp</Text>
+  </TouchableOpacity>
+<TouchableOpacity style={styles.btn}onPress={signIn}>
+    <Text style={styles.btnText}>Login In</Text>
 </TouchableOpacity>
 
 </View>
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
   width:127,
   height:41,
   top:99,
-  left:6
+  left:7
     },
     textSignUp:{
       fontSize:34,
@@ -111,7 +113,7 @@ position: 'absolute',
 width: 161,
 height: 20,
 left: 170,
-top: 337,
+top: 260,
 
 /* Body / Medium 14 */
 
@@ -133,7 +135,7 @@ color: '#333333'
         height:40,
         backgroundColor:'#FF8C00',
         position: 'relative',
-left: 17,
+left: 20,
 right: 0,
 top: 133,
 // bottom: 10,
@@ -161,4 +163,4 @@ color: '#FFFFFF'
     }
   });
   
-export default SignUp
+export default SellerLogin

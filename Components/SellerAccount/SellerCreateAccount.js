@@ -4,7 +4,7 @@ import { Button, ButtonGroup } from 'native-base';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 
-const SignUp = ({navigation}) => {
+const SellerSignUp = ({navigation}) => {
 const [email,setEmail]=useState('')
 const [password,setPssword]=useState('')
 const signUp=(e)=>{
@@ -16,12 +16,13 @@ e.preventDefault()
       // Signed in 
       const user = userCredential.user;
       alert('success')
-      navigation.navigate('Login')
+      navigation.navigate('SellerLogin')
       // ...
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      alert('Error',errorMessage)
       // ..
     });
 
@@ -34,19 +35,16 @@ e.preventDefault()
            <View style={styles.signUp1}>
 
 <View style={styles.signUp1inner}>
-  <Text style={styles.textSignUp}>SignUp</Text>
+  <Text style={styles.textSignUp}>Seller Create Account</Text>
   <TextInput placeholder='Email'  keyboardType='email-address' onChangeText={e=>setEmail(e)} style={styles.input1} />
   <TextInput placeholder='Password'  keyboardType='visible-password'  onChangeText={e=>setPssword(e)} style={styles.input1} />
   {/* <TextInput placeholder='Email'  style={styles.input1} /> */}
 
- <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
+ <TouchableOpacity onPress={()=>navigation.navigate('sellerLogin')}>
  <Text style={styles.alreadyAccount}>Already Account?</Text>
  </TouchableOpacity>
- <TouchableOpacity onPress={()=>navigation.navigate('SellerSignUp')}>
- <Text style={styles.alreadyAccount}>Seller ?</Text>
- </TouchableOpacity>
 <TouchableOpacity onPress={signUp} style={styles.btn}>
-    <Text style={styles.btnText}>SignUp</Text>
+    <Text style={styles.btnText}>Sign Up</Text>
 </TouchableOpacity>
 
 </View>
@@ -161,4 +159,4 @@ color: '#FFFFFF'
     }
   });
   
-export default SignUp
+export default SellerSignUp

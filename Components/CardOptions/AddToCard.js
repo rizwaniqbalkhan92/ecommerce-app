@@ -152,10 +152,10 @@ const styles = StyleSheet.create({
       },
       checkOut:{
           width:395,
-          height:90,
+          height:110,
           backgroundColor:'white',
           position:'absolute',
-          top:400
+          top:480
       },
       totalAmount:{
         width:340,

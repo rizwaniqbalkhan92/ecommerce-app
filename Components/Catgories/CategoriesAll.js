@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
+import { getDatabase, ref, onValue} from "firebase/database";
 import {
   StyleSheet,
   Text,
@@ -35,6 +36,13 @@ const CategoriesAll = ({navigation}) => {
     {image: img6, price: 'Rs 5000'},
     {image: img1, price: 'Rs 5000'},
   ];
+
+
+
+
+ 
+
+
 
   return (
     <View style={styles.main}>
@@ -99,6 +107,26 @@ const CategoriesAll = ({navigation}) => {
               <View style={styles.catrgory}>
                 <View style={styles.categorytext}>
                   <Text style={styles.categorytext2}>Electronics</Text>
+                </View>
+                {/* <Image source={item.image} style={styles.categoryImage} /> */}
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity  onPress={()=>navigation.navigate('Kids')}  >
+            <View style={styles.mainCategory}>
+              <View style={styles.catrgory}>
+                <View style={styles.categorytext}>
+                  <Text style={styles.categorytext2}>Kids</Text>
+                </View>
+                {/* <Image source={item.image} style={styles.categoryImage} /> */}
+              </View>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity  onPress={()=>navigation.navigate('Accessories')}  >
+            <View style={styles.mainCategory}>
+              <View style={styles.catrgory}>
+                <View style={styles.categorytext}>
+                  <Text style={styles.categorytext2}>Accessories</Text>
                 </View>
                 {/* <Image source={item.image} style={styles.categoryImage} /> */}
               </View>

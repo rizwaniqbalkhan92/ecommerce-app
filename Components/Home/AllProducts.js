@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {FlatList, StyleSheet, Text, Image,View, TouchableHighlight, TouchableOpacity} from 'react-native';
 import { style } from 'styled-system';
 import img1 from '../images/img1.jpg'
@@ -10,9 +10,55 @@ import  Slider  from './Slider'
 import img6 from '../images/img6.jpg'
 import DifferentCategories  from  '../Home/DifferentCategories'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { getDatabase, ref, onValue} from "firebase/database";
+import Detail from '../Details/Detail';
+
 
 
 const AllProducts = ({navigation}) => {
+const [products,setAllProducts]=useState([])
+console.log(products)
+  useEffect(()=>{
+    
+
+    const db = getDatabase();
+    const starCountRef = ref(db, 'seller/allProducts' );
+    onValue(starCountRef, (snapshot) => {
+      let data = snapshot.val();
+      let keys=Object.keys(data)
+      if(keys){
+        let arr=[]
+        for(let i=0; i<keys.length; i++){
+          const key=keys[i]
+          const dataFinal=data[key]
+          const object={data:dataFinal,key:key}
+          arr.push(object)
+          
+        }
+        setAllProducts(arr)
+      }
+        // updateStarCount(postElement, data);
+    });
+  },[])
+// const addWishList=()=>{
+
+
+
+//   const db = getDatabase();
+//   set(ref(db, `users/${id}/addWishList`), {
+//     username: name,
+//     email: email,
+//     profile_picture : imageUrl
+//   })
+//   .then(() => {
+//     // Data saved successfully!
+//   })
+//   .catch((error) => {
+//     // The write failed...
+//   });
+
+
+// }
 
 const data=[
     {image:img1,price:'Rs 5000'},
@@ -43,19 +89,21 @@ const data=[
     <View>
 
     <DifferentCategories/>
-      
-      <FlatList  data={data} numColumns={2} renderItem={({item})=>(
+    
+      <FlatList  data={products ? products : ''} numColumns={2} renderItem={({item})=>(
 <View style={styles.allProducts}>
       <View style={styles.product1}>
-<TouchableOpacity onPress={()=>navigation.navigate('DetailPage')}>
+<TouchableOpacity onPress={()=>navigation.navigation('Final')}>
 
         {/* <View style={styles.image}> */}
-            <Image source={item.image}  style={styles.image} resizeMode='contain' />
+            <Image source={{uri:item.data.images.img1}}  style={styles.image} resizeMode='contain' />
         {/* </View> */}
 </TouchableOpacity>
         <View style={styles.text}>
-        <Text style={styles.price}>{item.price}</Text> 
-          <View></View>
+        <Text style={styles.price}>{item.data.price}</Text> 
+         {/* <TouchableOpacity onPress={()=>addWishList}> 
+            <Text style={styles.wish}>WishList</Text>
+          </TouchableOpacity> */}
         </View>
       </View>
 
@@ -99,11 +147,17 @@ const styles = StyleSheet.create({
       height:20,
     //   borderColor:'organge',
     //   borderWidth:1,
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-around',
     backgroundColor:'#ffffff'
   },
   price:{
       fontWeight:'800',
       fontSize:16,
       lineHeight:20
+  },
+  wish:{
+    color:'black'
   }
 });

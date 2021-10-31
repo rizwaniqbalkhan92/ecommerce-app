@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text,FlatList,Image, TouchableOpacity, View } from 'react-native'
+import { getDatabase, ref, onValue} from "firebase/database";
 import {ArrowBackIcon,NativeBaseProvider}  from 'native-base'
 import { display, width } from 'styled-system'
 import img1 from '../images/img1.jpg'
@@ -8,12 +9,36 @@ import img3 from '../images/img3.jpg'
 import img4 from '../images/img4.jpg'
 import img5 from '../images/img5.jpg'
 import img6 from '../images/img6.jpg'
-import { getDatabase, ref, onValue} from "firebase/database";
 
 
 
 
-const Electronics = ({navigation}) => {
+
+const Kids = ({navigation}) => {
+const [renderData,setRenderData]=useState([])
+console.log(renderData)
+useEffect(()=>{
+
+  const db = getDatabase();
+  const starCountRef = ref(db, 'seller/Categories/Kids' );
+  onValue(starCountRef, (snapshot) => {
+    let data = snapshot.val();
+    let keys=Object.keys(data)
+    if(keys){
+      let arr=[]
+      for(let i=0; i<keys.length; i++){
+        const key=keys[i]
+        const dataFinal=data[key]
+        const obj={data:dataFinal,key:key}
+        arr.push(obj)
+      }
+      setRenderData(arr)
+    }
+    // updateStarCount(postElement, data);
+  });
+  
+},[])
+
     const data=[
         {image:img1,price:'Rs 5000'},
         {image:img2,price:'Rs 5000'},
@@ -38,44 +63,15 @@ const Electronics = ({navigation}) => {
         {image:img5,price:'Rs 5000'},
         {image:img6,price:'Rs 5000'},
     ]
-
-    const [renderData,setRenderData]=useState([])
-    console.log(renderData)
-    useEffect(()=>{
-    
-      const db = getDatabase();
-      const starCountRef = ref(db, 'seller/Categories/Electronics' );
-      onValue(starCountRef, (snapshot) => {
-        let data = snapshot.val();
-        let keys=Object.keys(data)
-        if(keys){
-          let arr=[]
-          for(let i=0; i<keys.length; i++){
-            const key=keys[i]
-            const dataFinal=data[key]
-            const obj={data:dataFinal,key:key}
-            arr.push(obj)
-          }
-          setRenderData(arr)
-        }
-        // updateStarCount(postElement, data);
-      });
-      
-    },[])
-    
-
-
-
-
     return (
         <View style={styles.mainShoes}>
         <View style={styles.headerDiv}>
             <NativeBaseProvider>
-            <TouchableOpacity style={styles.icons}  onPress={()=>navigation.navigate('Categories')}>
+            <TouchableOpacity style={styles.icons} onPress={()=>navigation.navigate('Categories')}>
             <ArrowBackIcon size='6' />
             </TouchableOpacity>
             </NativeBaseProvider>
-            <Text style={styles.cat}>Electronics</Text>
+            <Text style={styles.cat}>Clothes</Text>
             <View style={styles.icons}>
                 <Text></Text>
             </View>
@@ -84,7 +80,7 @@ const Electronics = ({navigation}) => {
         <FlatList  data={renderData} numColumns={2} renderItem={({item})=>(
 <View style={styles.allProducts}>
       <View style={styles.product1}>
-<TouchableOpacity>
+<TouchableOpacity >
 
         {/* <View style={styles.image}> */}
             <Image source={{uri:item.data.images.img1}} style={styles.image} resizeMode='contain' />
@@ -107,7 +103,7 @@ const Electronics = ({navigation}) => {
     )
 }
 
-export default Electronics
+export default Kids
 
 const styles = StyleSheet.create({
     mainShoes:{width:375,

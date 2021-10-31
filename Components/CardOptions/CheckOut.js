@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import {ArrowBackIcon, NativeBaseProvider} from 'native-base';
 
-const CheckOut = () => {
+const CheckOut = ({navigation}) => {
   return (
     <View style={styles.mainShoes}>
       <View style={styles.headerDiv}>
         <NativeBaseProvider>
-          <TouchableOpacity style={styles.icons}>
+          <TouchableOpacity style={styles.icons} onPress={()=>navigation.navigate('AddToCard')} > 
             <ArrowBackIcon size="6" />
           </TouchableOpacity>
         </NativeBaseProvider>

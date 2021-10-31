@@ -1,5 +1,6 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { StyleSheet, Text,FlatList,Image, TouchableOpacity, View } from 'react-native'
+import { getDatabase, ref, onValue} from "firebase/database";
 import {ArrowBackIcon,NativeBaseProvider}  from 'native-base'
 import { display, width } from 'styled-system'
 import img1 from '../images/img1.jpg'
@@ -13,7 +14,31 @@ import img6 from '../images/img6.jpg'
 
 
 
-const Clothes = () => {
+const Clothes = ({navigation}) => {
+const [renderData,setRenderData]=useState([])
+console.log(renderData)
+useEffect(()=>{
+
+  const db = getDatabase();
+  const starCountRef = ref(db, 'seller/Categories/Clothes' );
+  onValue(starCountRef, (snapshot) => {
+    let data = snapshot.val();
+    let keys=Object.keys(data)
+    if(keys){
+      let arr=[]
+      for(let i=0; i<keys.length; i++){
+        const key=keys[i]
+        const dataFinal=data[key]
+        const obj={data:dataFinal,key:key}
+        arr.push(obj)
+      }
+      setRenderData(arr)
+    }
+    // updateStarCount(postElement, data);
+  });
+  
+},[])
+
     const data=[
         {image:img1,price:'Rs 5000'},
         {image:img2,price:'Rs 5000'},
@@ -42,7 +67,7 @@ const Clothes = () => {
         <View style={styles.mainShoes}>
         <View style={styles.headerDiv}>
             <NativeBaseProvider>
-            <TouchableOpacity style={styles.icons}>
+            <TouchableOpacity style={styles.icons} onPress={()=>navigation.navigate('Categories')}>
             <ArrowBackIcon size='6' />
             </TouchableOpacity>
             </NativeBaseProvider>
@@ -52,17 +77,17 @@ const Clothes = () => {
             </View>
         </View>
 
-        <FlatList  data={data} numColumns={2} renderItem={({item})=>(
+        <FlatList  data={renderData} numColumns={2} renderItem={({item})=>(
 <View style={styles.allProducts}>
       <View style={styles.product1}>
-<TouchableOpacity>
+<TouchableOpacity >
 
         {/* <View style={styles.image}> */}
-            <Image source={item.image} style={styles.image} resizeMode='contain' />
+            <Image source={{uri:item.data.images.img2}} style={styles.image} resizeMode='contain' />
         {/* </View> */}
 </TouchableOpacity>
         <View style={styles.text}>
-        <Text style={styles.price}>{item.price}</Text> 
+        <Text style={styles.price}>{item.data.price}</Text> 
           <View></View>
         </View>
       </View>

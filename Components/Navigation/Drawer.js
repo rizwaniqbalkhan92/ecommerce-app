@@ -11,7 +11,9 @@ const Drawer = () => {
     return (
         
 
-        <MainDrawer.Navigator>
+        <MainDrawer.Navigator  screenOptions={{
+            headerShown: false
+          }}>
             <MainDrawer.Screen name='tabBottom' component={TabBottom}  />
             <MainDrawer.Screen name='about' component={About}  />
             {/* <MainDrawer.Screen name='DetailsPage' component={DetailsPage}  /> */}

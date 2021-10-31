@@ -24,7 +24,7 @@ const [img,setImg]=useState(img1)
 
   return (
     <View style={styles.main}>
-      <View style={styles.headerDiv}>
+      {/* <View style={styles.headerDiv}>
         <NativeBaseProvider>
           <TouchableOpacity onPress={navigation.navigate('AllProducts')}  style={styles.icons}>
             <ArrowBackIcon size="6" />
@@ -34,8 +34,8 @@ const [img,setImg]=useState(img1)
         <View style={styles.icons}>
           <Text></Text>
         </View>
-      </View>
-      <View>
+      </View> */}
+      {/* <View>
         <View style={styles.image}>
           <Image source={img} resizeMode="contain" style={styles.image1} />
         </View>
@@ -112,8 +112,8 @@ const [img,setImg]=useState(img1)
         <View style={styles.description}>
         <Text style={styles.desText}>This is the shoe for every one thos ewho want to buyy</Text>
         </View>
-      </View>
-      <View style={styles.addToCard}>
+      </View> */}
+      {/* <View style={styles.addToCard}>
 <View style={styles.innerAddToCard}>
   <Text style={styles.text}>Shoe For Every</Text>
 <Text style={styles.price}>$200</Text>
@@ -127,7 +127,8 @@ const [img,setImg]=useState(img1)
 </TouchableOpacity>
 
 </View>
-      </View>
+      </View> */}
+      <Text>Details</Text>
     </View>
   );
 };
